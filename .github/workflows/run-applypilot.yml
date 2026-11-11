@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install --no-deps python-jobspy && pip install pydantic tls-client requests markdownify regex
           pip install applypilot
-          python -m playwright install --with-deps chromium
+          python -m playwright install chromium
 
       - name: Configure Profile, Resume, and Searches
         run: |
