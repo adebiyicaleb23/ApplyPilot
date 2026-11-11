@@ -1,6 +1,6 @@
-﻿defaults:
+defaults:
   location: Remote
-  results_per_site: 5
+  results_per_site: 10
   hours_old: 72
 locations:
   - location: Remote
@@ -8,14 +8,6 @@ locations:
 queries:
   - query: AI Trainer
     tier: 1
-  - query: Data Annotation Specialist
-    tier: 1
-  - query: RLHF Specialist
-    tier: 1
-  - query: Prompt Engineer
-    tier: 1
-  - query: Virtual Assistant
-    tier: 2
 sites:
   - indeed
 scrapers:
