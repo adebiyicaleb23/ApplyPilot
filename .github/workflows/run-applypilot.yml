@@ -22,11 +22,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install --no-deps python-jobspy && pip install pydantic tls-client requests markdownify regex
           pip install applypilot
+          python -m playwright install --with-deps chromium
 
-      - name: Configure Profile and Searches
+      - name: Configure Profile, Resume, and Searches
         run: |
           mkdir -p ~/.applypilot
           if [ -f profile.json ]; then cp profile.json ~/.applypilot/; fi
+          if [ -f resume.txt ]; then cp resume.txt ~/.applypilot/; fi
           if [ -f searches.yaml ]; then cp searches.yaml ~/.applypilot/; fi
 
       - name: Run ApplyPilot with Qwen Remote Backend
