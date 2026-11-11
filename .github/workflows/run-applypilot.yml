@@ -2,9 +2,8 @@ name: Run ApplyPilot
 
 on:
   schedule:
-    # Runs every day at 8:00 AM UTC
     - cron: '0 8 * * *'
-  workflow_dispatch: # Allows you to click a button to run it manually anytime
+  workflow_dispatch:
 
 jobs:
   applypilot-run:
@@ -24,8 +23,17 @@ jobs:
           pip install --no-deps python-jobspy && pip install pydantic tls-client requests markdownify regex
           pip install applypilot
 
-      - name: Run ApplyPilot Pipeline
+      - name: Configure Profile and Searches
+        run: |
+          mkdir -p ~/.applypilot
+          if [ -f profile.json ]; then cp profile.json ~/.applypilot/; fi
+          if [ -f searches.yaml ]; then cp searches.yaml ~/.applypilot/; fi
+
+      - name: Run ApplyPilot with Qwen Remote Backend
         env:
+          LLM_URL: ${{ secrets.LLM_URL }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           applypilot run --validation lenient
